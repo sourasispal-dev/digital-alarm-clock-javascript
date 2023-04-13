@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Alarm Clock</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div id='main-container'>
+    <h2 id='clock'></h2>
+  </div>
+
+  <div id='alarm-container'>
+    <h1>Set Alarm Time</h1>
+      <label>
+        <div>
+        <select id='hrs' ></select>
+        </div>
+      </label>
+      <label>
+        <div>
+        <select id='mins' ></select>
+        </div>
+      </label>
+
+      <label>
+        <div>
+          <select id="am-pm">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </label>
+      </div>
+  </div>
+
+  <div id='buttonHolder'>
+    <div>
+      <button  id='setButton' onClick='alarmSet()'>Set Alarm</button>
+    </div>
+
+    <div>
+      <button  id='clearButton' onClick='alarmClear()'>Clear Alarm</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
