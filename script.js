@@ -1,37 +1,32 @@
-
-
 var sound = new Audio("https://www.freespecialeffects.co.uk/soundfx/animals/duck1.wav");
-		sound.loop = true;
+sound.loop = true;
 
 var h2 = document.getElementById('clock');
 
 // display current time by the second
 var currentTime = setInterval(function(){
-	var date = new Date();
-	
-	var hours = (12 - (date.getHours()));
-	// var hours = date.getHours();
-	
-	var minutes = date.getMinutes();
-	
-	var seconds = date.getSeconds();
-	
-	var ampm = (date.getHours()) < 12 ? 'AM' : 'PM';
+    var date = new Date();
 
+    var hours = (12 - (date.getHours()));
+    // var hours = date.getHours();
 
-	//convert military time to standard time
+    var minutes = date.getMinutes();
 
-	if (hours < 0) {
-		hours = hours * -1;
-	} else if (hours == 00) {
-		hours = 12;
-	} else {
-		hours = hours;
-	}
+    var seconds = date.getSeconds();
 
-	
-	h2.textContent = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds) + " "+ ampm;
-	
+    var ampm = (date.getHours()) < 12 ? 'AM' : 'PM';
+
+    //convert military time to standard time
+    if (hours < 0) {
+        hours = hours * -1;
+    } else if (hours == 00) {
+        hours = 12;
+    } else {
+        hours = hours;
+    }
+
+    h2.textContent = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds) + " "+ ampm;
+
 },1000);
 
 
@@ -40,31 +35,24 @@ var currentTime = setInterval(function(){
 */
 
 function addZero(time) {
-
-		return (time < 10) ? "0" + time : time;
-	
+    return (time < 10) ? "0" + time : time;
 }
 
 function hoursMenu(){
-
-	var select = document.getElementById('hrs');
-	var hrs = 12
-
-	for (i=1; i <= hrs; i++) {
-		select.options[select.options.length] = new Option( i < 10 ? "0" + i : i, i);
-		
-	}
+    var select = document.getElementById('hrs');
+    var hrs = 12;
+    for (i=1; i <= hrs; i++) {
+        select.options[select.options.length] = new Option( i < 10 ? "0" + i : i, i);
+    }
 }
 hoursMenu();
 
 function minMenu(){
-
-	var select = document.getElementById('mins');
-	var min = 59;
-
-	for (i=0; i <= min; i++) {
-		select.options[select.options.length] = new Option(i < 10 ? "0" + i : i, i);
-	}
+    var select = document.getElementById('mins');
+    var min = 59;
+    for (i=0; i <= min; i++) {
+        select.options[select.options.length] = new Option(i < 10 ? "0" + i : i, i);
+    }
 }
 minMenu();
 
@@ -79,81 +67,62 @@ minMenu();
 // }
 // secMenu();
 
-
 function alarmSet() {
-
-	var hr = document.getElementById('hrs');
-	
-	var min = document.getElementById('mins');
-	
-	var ap = document.getElementById('am-pm');
-    
-
+    var hr = document.getElementById('hrs');
+    var min = document.getElementById('mins');
+    var ap = document.getElementById('am-pm');
     var selectedHour = hr.options[hr.selectedIndex].value;
     var selectedMin = min.options[min.selectedIndex].value;
     // var selectedSec = sec.options[sec.selectedIndex].value;
     var selectedAP = ap.options[ap.selectedIndex].value;
-
     var alarmTime = addZero(selectedHour) + ":" + addZero(selectedMin) + ":" + selectedAP;
-    console.log('alarmTime:' + alarmTime);
 
     document.getElementById('hrs').disabled = true;
-	document.getElementById('mins').disabled = true;
-	document.getElementById('am-pm').disabled = true;
+    document.getElementById('mins').disabled = true;
+    document.getElementById('am-pm').disabled = true;
 
+    //when alarmtime is equal to currenttime then play a sound
+    var h2 = document.getElementById('clock');
 
-//when alarmtime is equal to currenttime then play a sound
-	var h2 = document.getElementById('clock');
+    /*function to calculate the current time 
+    then compare it to the alarmtime and play a sound when they are equal
+    */
 
-/*function to calcutate the current time 
-then compare it to the alarmtime and play a sound when they are equal
-*/
+    setInterval(function(){
+        var date = new Date();
 
-setInterval(function(){
+        var hours = (12 - (date.getHours()));
+        // var hours = date.getHours();
 
-	var date = new Date();
-	
-	var hours = (12 - (date.getHours()));
-	// var hours = date.getHours();
-	
-	var minutes = date.getMinutes();
-	
-	// var seconds = date.getSeconds();
-	
-	var ampm = (date.getHours()) < 12 ? 'AM' : 'PM';
+        var minutes = date.getMinutes();
 
+        // var seconds = date.getSeconds();
 
-	//convert military time to standard time
+        var ampm = (date.getHours()) < 12 ? 'AM' : 'PM';
 
-	if (hours < 0) {
-		hours = hours * -1;
-	} else if (hours == 00) {
-		hours = 12;
-	} else {
-		hours = hours;
-	}
-	
-	var currentTime = h2.textContent = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds) + " " + ampm;
-	
+        //convert military time to standard time
+        if (hours < 0) {
+            hours = hours * -1;
+        } else if (hours == 00) {
+            hours = 12;
+        } else {
+            hours = hours;
+        }
 
-	if (alarmTime == currentTime) {
-		sound.play();
-		}
+        var currentTime = h2.textContent = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds) + " " + ampm;
 
-},1000);
+        if (alarmTime == currentTime) {
+            sound.play();
+        }
 
+    },1000);
 
-	console.log('currentTime:' + currentTime);	
-
+    console.log('currentTime:' + currentTime);   
 }
-
 
 function alarmClear() {
-
-	document.getElementById('hrs').disabled = false;
-	document.getElementById('mins').disabled = false;
-	document.getElementById('am-pm').disabled = false;
-	sound.pause();
+    document.getElementById('hrs').disabled = false;
+    document.getElementById('mins').disabled = false;
+    document.getElementById('am-pm').disabled = false;
+    sound.pause();
 }
-
-
