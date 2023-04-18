@@ -8,7 +8,7 @@ var currentTime = setInterval(function(){
 	var date = new Date();
 	
 	var hours = (12 - (date.getHours()));
-	var hours = date.getHours();
+	// var hours = date.getHours();
 	
 	var minutes = date.getMinutes();
 	
@@ -115,7 +115,7 @@ setInterval(function(){
 	var date = new Date();
 	
 	var hours = (12 - (date.getHours()));
-	var hours = date.getHours();
+	// var hours = date.getHours();
 	
 	var minutes = date.getMinutes();
 	
